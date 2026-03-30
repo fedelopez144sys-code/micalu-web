@@ -1,36 +1,863 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <title>Micalu animaciones</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h1> Hola, soy Micalu Animaciones</h1>
-        <p>
-            Entretenimiento y shows infantiles
-        </p>
-        <button>
-            Click me
-        </button>
-        <div class="servicios">
-            <div class="card">Show de princesas</div>
-            <div class="card">Animación temática</div>
-            <div class="card">Juegos y actividades</div>
-        </div>
-            <section>
-                <h2><Queres reservar un show?</h2>
-                    <p>Escribinos y te respondemos a la brevedad,</p>
-                    <a href="https://wa.me/+5491122370215" targer="_blank">
-                        Contactanos por WhatsApp
-                    </a>
-            </section>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Micalu Animaciones – Fiestas Infantiles Mágicas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink:    #FF5FA0;
+    --yellow:  #FFD23F;
+    --mint:    #3ECFB2;
+    --purple:  #8B5CF6;
+    --orange:  #FF8C42;
+    --sky:     #60C8F5;
+    --white:   #FFFDF7;
+    --dark:    #1A1035;
+    --card-bg: #FFFFFF;
+    --text:    #2D2254;
+    --muted:   #6B5F8A;
+    --wa:      #25D366;
+    --wa-dark: #128C7E;
+  }
 
-         <div class="servicios">
-                <div class="card">Show de princesas</div>
-                <div class="card">Animación temática</div>
-                <div class="card">Juegos y actividades</div>
-         </div>
-        <script src="script.js"></script>
-    </body>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── CONFETTI BG DOTS ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(circle 3px at 10% 15%, var(--yellow) 100%, transparent 0),
+      radial-gradient(circle 4px at 25% 40%, var(--pink) 100%, transparent 0),
+      radial-gradient(circle 3px at 45% 8%, var(--mint) 100%, transparent 0),
+      radial-gradient(circle 5px at 70% 20%, var(--orange) 100%, transparent 0),
+      radial-gradient(circle 3px at 90% 35%, var(--purple) 100%, transparent 0),
+      radial-gradient(circle 4px at 5% 65%, var(--sky) 100%, transparent 0),
+      radial-gradient(circle 3px at 85% 70%, var(--yellow) 100%, transparent 0),
+      radial-gradient(circle 4px at 55% 85%, var(--pink) 100%, transparent 0),
+      radial-gradient(circle 5px at 20% 90%, var(--mint) 100%, transparent 0),
+      radial-gradient(circle 3px at 75% 92%, var(--purple) 100%, transparent 0);
+    pointer-events: none;
+    z-index: 0;
+    opacity: .55;
+  }
+
+  section { position: relative; z-index: 1; }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,253,247,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--yellow);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .75rem 2rem;
+  }
+  .logo {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.5rem; font-weight: 800;
+    color: var(--pink);
+    text-decoration: none;
+    letter-spacing: -.5px;
+  }
+  .logo span { color: var(--purple); }
+  nav a.nav-cta {
+    background: var(--wa);
+    color: #fff;
+    font-weight: 700;
+    padding: .5rem 1.2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: .9rem;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 4px 14px rgba(37,211,102,.35);
+    display: flex; align-items: center; gap: .4rem;
+  }
+  nav a.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,211,102,.45); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 92vh;
+    background: linear-gradient(140deg, #FFF0F8 0%, #F0F9FF 50%, #F3EEFF 100%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    padding: 5rem 6% 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,95,160,.18) 0%, transparent 70%);
+    right: -100px; top: -100px;
+    pointer-events: none;
+  }
+
+  .hero-text { z-index: 2; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: var(--yellow);
+    color: var(--dark);
+    font-weight: 700; font-size: .85rem;
+    padding: .35rem .9rem;
+    border-radius: 50px;
+    margin-bottom: 1.2rem;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-5px); }
+  }
+
+  .hero h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--dark);
+    margin-bottom: 1rem;
+  }
+  .hero h1 .highlight {
+    color: var(--pink);
+    position: relative;
+    display: inline-block;
+  }
+  .hero h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 8px;
+    background: var(--yellow);
+    border-radius: 4px;
+    z-index: -1;
+    transform: skewX(-5deg);
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-wa {
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: linear-gradient(135deg, var(--wa), var(--wa-dark));
+    color: #fff;
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.1rem; font-weight: 700;
+    padding: .9rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(37,211,102,.4);
+    transition: transform .2s, box-shadow .2s;
+    border: none; cursor: pointer;
+  }
+  .btn-wa:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 30px rgba(37,211,102,.5); }
+  .btn-wa svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: .5rem;
+    border: 2px solid var(--pink);
+    color: var(--pink);
+    font-family: 'Baloo 2', cursive;
+    font-size: 1rem; font-weight: 700;
+    padding: .85rem 1.8rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background .2s, color .2s;
+    background: transparent;
+  }
+  .btn-outline:hover { background: var(--pink); color: #fff; }
+
+  .hero-trust {
+    display: flex; align-items: center; gap: .5rem;
+    margin-top: 1.5rem;
+    font-size: .9rem; color: var(--muted);
+  }
+  .stars { color: var(--yellow); letter-spacing: 2px; }
+
+  /* HERO IMAGE SIDE */
+  .hero-visual {
+    position: relative; z-index: 2;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-img-frame {
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 4/3.6;
+    border-radius: 28px;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(139,92,246,.3), 0 0 0 6px var(--yellow);
+  }
+  .hero-img-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: .5rem;
+    font-size: 5rem;
+    background: linear-gradient(160deg, #FFB3D1 0%, #C4B5FD 50%, #A5F3FC 100%);
+  }
+  .hero-img-placeholder p {
+    font-size: .8rem; color: var(--muted); text-align: center; padding: 0 1rem; margin: 0;
+  }
+  .bubble {
+    position: absolute;
+    border-radius: 16px;
+    padding: .6rem 1rem;
+    font-family: 'Baloo 2', cursive;
+    font-weight: 700;
+    font-size: .85rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
+    white-space: nowrap;
+  }
+  .bubble-1 { background: var(--yellow); color: var(--dark); top: -12px; right: 20px; transform: rotate(4deg); }
+  .bubble-2 { background: var(--mint); color: var(--dark); bottom: 20px; left: -16px; transform: rotate(-3deg); }
+  .bubble-3 { background: var(--pink); color: #fff; top: 50%; right: -20px; transform: rotate(2deg); font-size: .75rem; }
+
+  /* ─── SECTION WRAPPER ─── */
+  .section-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 5rem 5%;
+  }
+  .section-tag {
+    display: inline-block;
+    background: var(--purple);
+    color: #fff;
+    font-weight: 700;
+    font-size: .78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: .3rem .9rem;
+    border-radius: 50px;
+    margin-bottom: .8rem;
+  }
+  .section-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--dark);
+    margin-bottom: .6rem;
+  }
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+  }
+
+  /* ─── SERVICES GRID ─── */
+  #servicios { background: linear-gradient(180deg, var(--white) 0%, #F8F0FF 100%); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.6rem;
+  }
+
+  .service-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    padding: 2rem 1.8rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,.07);
+    border: 2px solid transparent;
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+    display: flex; flex-direction: column; gap: .9rem;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 5px;
+    border-radius: 24px 24px 0 0;
+  }
+  .card-pink::before   { background: var(--pink); }
+  .card-yellow::before { background: var(--yellow); }
+  .card-mint::before   { background: var(--mint); }
+  .card-purple::before { background: var(--purple); }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,.13);
+  }
+  .card-pink:hover   { border-color: var(--pink); }
+  .card-yellow:hover { border-color: var(--yellow); }
+  .card-mint:hover   { border-color: var(--mint); }
+  .card-purple:hover { border-color: var(--purple); }
+
+  .card-icon {
+    font-size: 2.4rem;
+    width: 58px; height: 58px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-pink   .card-icon { background: #FFE4F0; }
+  .card-yellow .card-icon { background: #FFF8D6; }
+  .card-mint   .card-icon { background: #D6F9F3; }
+  .card-purple .card-icon { background: #EDE9FE; }
+
+  .card-badge {
+    position: absolute; top: 1.2rem; right: 1.2rem;
+    background: var(--yellow);
+    color: var(--dark);
+    font-size: .72rem; font-weight: 800;
+    padding: .2rem .65rem;
+    border-radius: 50px;
+    letter-spacing: .5px;
+  }
+  .card-pink   .card-badge { background: var(--pink);   color: #fff; }
+  .card-yellow .card-badge { background: var(--orange); color: #fff; }
+  .card-mint   .card-badge { background: var(--mint);   color: var(--dark); }
+  .card-purple .card-badge { background: var(--purple); color: #fff; }
+
+  .service-card h3 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.3rem; font-weight: 800;
+    color: var(--dark);
+  }
+  .service-card .desc {
+    font-size: .95rem; color: var(--muted); line-height: 1.55;
+  }
+
+  .includes-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: .35rem;
+    font-size: .9rem;
+    color: var(--text);
+  }
+  .includes-list li::before {
+    content: '✓ ';
+    font-weight: 800;
+    color: var(--mint);
+  }
+
+  .card-duration {
+    display: inline-flex; align-items: center; gap: .4rem;
+    font-size: .82rem; font-weight: 700;
+    color: var(--muted);
+    background: #F3F4F6;
+    padding: .3rem .8rem;
+    border-radius: 50px;
+    width: fit-content;
+  }
+
+  .btn-wa-sm {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: var(--wa);
+    color: #fff;
+    font-family: 'Baloo 2', cursive;
+    font-size: .95rem; font-weight: 700;
+    padding: .75rem 1.4rem;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-top: auto;
+    transition: background .2s, transform .2s;
+    width: fit-content;
+  }
+  .btn-wa-sm:hover { background: var(--wa-dark); transform: scale(1.02); }
+  .btn-wa-sm svg { width: 18px; height: 18px; fill: #fff; }
+
+  /* ─── DIFFERENTIALS ─── */
+  #diferenciales {
+    background: linear-gradient(135deg, var(--dark) 0%, #2D1B69 100%);
+    color: var(--white);
+  }
+  #diferenciales .section-title { color: var(--white); }
+  #diferenciales .section-sub   { color: rgba(255,255,255,.7); }
+  #diferenciales .section-tag   { background: var(--pink); }
+
+  .diffs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.4rem;
+  }
+  .diff-card {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 20px;
+    padding: 1.8rem 1.6rem;
+    transition: background .25s, transform .25s;
+  }
+  .diff-card:hover { background: rgba(255,255,255,.13); transform: translateY(-4px); }
+  .diff-icon { font-size: 2rem; margin-bottom: .7rem; }
+  .diff-card h4 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.05rem; font-weight: 800;
+    color: var(--yellow);
+    margin-bottom: .4rem;
+  }
+  .diff-card p { font-size: .9rem; color: rgba(255,255,255,.7); line-height: 1.55; }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonios { background: linear-gradient(180deg, #FFF0F8 0%, var(--white) 100%); }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .testi-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 1.8rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    position: relative;
+    border-left: 4px solid var(--pink);
+    transition: transform .25s;
+  }
+  .testi-card:nth-child(2) { border-left-color: var(--mint); }
+  .testi-card:nth-child(3) { border-left-color: var(--purple); }
+  .testi-card:hover { transform: translateY(-4px); }
+
+  .testi-stars { color: var(--yellow); font-size: 1.1rem; margin-bottom: .8rem; }
+  .testi-text { font-size: .97rem; color: var(--muted); line-height: 1.6; font-style: italic; margin-bottom: 1.2rem; }
+  .testi-author { display: flex; align-items: center; gap: .8rem; }
+  .testi-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .av1 { background: #FFE4F0; }
+  .av2 { background: #D6F9F3; }
+  .av3 { background: #EDE9FE; }
+  .testi-name { font-weight: 800; font-size: .9rem; color: var(--dark); }
+  .testi-event { font-size: .78rem; color: var(--muted); }
+
+  .testi-photo-hint {
+    background: linear-gradient(135deg, #FFF0F8, #F0F9FF);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 2px dashed var(--pink);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; gap: .7rem;
+    min-height: 220px;
+  }
+  .testi-photo-hint span { font-size: 2.5rem; }
+  .testi-photo-hint p { font-size: .85rem; color: var(--muted); line-height: 1.5; }
+  .testi-photo-hint strong { color: var(--pink); }
+
+  /* ─── FINAL CTA ─── */
+  #cta-final {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #cta-final::before {
+    content: '🎉 🎈 ⭐ 🎊 🌈 🎁 🎀 🥳';
+    font-size: 1.8rem;
+    position: absolute;
+    top: 1rem; left: 0; right: 0;
+    text-align: center;
+    opacity: .25;
+    letter-spacing: 1.5rem;
+    pointer-events: none;
+  }
+  #cta-final .section-inner {
+    display: flex; flex-direction: column; align-items: center; gap: 1.4rem;
+  }
+  #cta-final .section-tag { background: rgba(255,255,255,.25); color: #fff; }
+  #cta-final .section-title { color: #fff; text-align: center; }
+  #cta-final .section-sub { color: rgba(255,255,255,.85); text-align: center; }
+
+  .urgency-pill {
+    background: var(--yellow);
+    color: var(--dark);
+    font-weight: 800;
+    font-size: .9rem;
+    padding: .45rem 1.2rem;
+    border-radius: 50px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50%      { transform: scale(1.04); }
+  }
+
+  .btn-wa-lg {
+    display: inline-flex; align-items: center; gap: .7rem;
+    background: #fff;
+    color: var(--wa-dark);
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.2rem; font-weight: 800;
+    padding: 1.1rem 2.4rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(0,0,0,.2);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-wa-lg:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 14px 40px rgba(0,0,0,.3); }
+  .btn-wa-lg svg { width: 24px; height: 24px; fill: var(--wa); }
+
+  .microcopy { font-size: .82rem; color: rgba(255,255,255,.7); }
+
+  /* ─── FLOATING WA BUTTON ─── */
+  .wa-float {
+    position: fixed;
+    bottom: 1.6rem; right: 1.6rem;
+    z-index: 999;
+    background: var(--wa);
+    color: #fff;
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 24px rgba(37,211,102,.5);
+    text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+    animation: waFloat 4s ease-in-out infinite;
+  }
+  @keyframes waFloat {
+    0%,100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-6px) scale(1.04); }
+  }
+  .wa-float:hover { transform: scale(1.1) !important; box-shadow: 0 10px 32px rgba(37,211,102,.7); }
+  .wa-float svg { width: 30px; height: 30px; fill: #fff; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,.5);
+    text-align: center;
+    padding: 2rem;
+    font-size: .85rem;
+  }
+  footer a { color: var(--pink); text-decoration: none; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 4rem 5% 3rem;
+      text-align: center;
+    }
+    .hero-text { order: 1; }
+    .hero-visual { order: 2; }
+    .hero-ctas { justify-content: center; }
+    .hero-trust { justify-content: center; }
+    .hero p { margin-inline: auto; }
+    nav { padding: .75rem 1.2rem; }
+    .logo { font-size: 1.2rem; }
+    .bubble-2, .bubble-3 { display: none; }
+  }
+
+  /* ─── ENTRANCE ANIMATIONS ─── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ░░ NAVBAR ░░ -->
+<nav>
+  <a href="#" class="logo">Micalu<span> Animaciones</span> 🎈</a>
+  <a class="nav-cta" href="https://wa.me/5491122370215?text=%C2%A1Hola!%20Quiero%20info%20para%20una%20fiesta%20%F0%9F%8E%89" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.436 1.27 4.888L2.004 22l5.237-1.246A9.927 9.927 0 0012.004 22c5.527 0 10.004-4.477 10.004-10.004C22.008 6.477 17.531 2 12.004 2z"/></svg>
+    ¡Consultá ahora!
+  </a>
+</nav>
+
+<!-- ░░ HERO ░░ -->
+<section class="hero" id="inicio">
+  <div class="hero-text">
+    <div class="hero-badge">🎉 ¡Más de 150 fiestas felices!</div>
+    <h1>
+      Hacé que la fiesta de tu hij@ sea
+      <span class="highlight">inolvidable</span>
+    </h1>
+    <p>
+      Animaciones temáticas, maquillaje artístico y talleres creativos que conquistan a los chicos
+      y le dan a vos el descanso que te merecés.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn-wa" href="https://wa.me/5491122370215?text=%C2%A1Hola!%20Quiero%20reservar%20una%20animaci%C3%B3n%20para%20la%20fiesta%20de%20mi%20hijo%2Fa%20%F0%9F%8E%89%20%C2%BFMe%20pod%C3%A9s%20contar%20m%C3%A1s%3F" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.436 1.27 4.888L2.004 22l5.237-1.246A9.927 9.927 0 0012.004 22c5.527 0 10.004-4.477 10.004-10.004C22.008 6.477 17.531 2 12.004 2z"/></svg>
+        ¡Quiero reservar mi fecha!
+      </a>
+      <a class="btn-outline" href="#servicios">Ver servicios ↓</a>
+    </div>
+    <div class="hero-trust">
+      <span class="stars">★★★★★</span>
+      <span>+150 familias nos eligieron · Zona GBA y CABA</span>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-img-frame">
+      <div class="hero-img-placeholder">
+        🎨🎭🎈
+        <p>📸 Reemplazá esto con una foto real de una animación</p>
+      </div>
+      <div class="bubble bubble-1">🎂 ¡Cumple épico!</div>
+      <div class="bubble bubble-2">✨ Taller incluido</div>
+      <div class="bubble bubble-3">🎭 Animación en vivo</div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ SERVICIOS ░░ -->
+<section id="servicios">
+  <div class="section-inner">
+    <span class="section-tag">✨ Nuestros servicios</span>
+    <h2 class="section-title">Todo lo que tu fiesta<br>necesita en un lugar</h2>
+    <p class="section-sub">Cada servicio está diseñado para que los chicos se diviertan al máximo y los adultos puedan disfrutar sin preocupaciones.</p>
+
+    <div class="services-grid">
+
+      <!-- MAQUILLAJE ARTÍSTICO -->
+      <div class="service-card card-pink fade-in">
+        <div class="card-badge">⭐ Más pedido</div>
+        <div class="card-icon">🎨</div>
+        <h3>Maquillaje Artístico</h3>
+        <p class="desc">Convertí a cada niño en su personaje favorito. Diseños seguros, coloridos y que duran toda la fiesta.</p>
+        <ul class="includes-list">
+          <li>Maquillaje profesional cara completa o media cara</li>
+          <li>Diseños temáticos: superhéroes, princesas, animales y más</li>
+          <li>Productos hipoalergénicos y seguros para niños</li>
+          <li>Hasta 20 niños por sesión</li>
+          <li>Momento fotográfico incluido 📸</li>
+        </ul>
+        <span class="card-duration">⏱ 45 – 60 minutos</span>
+        <a class="btn-wa-sm" href="https://wa.me/5491122370215?text=%C2%A1Hola!%20Me%20interesa%20el%20servicio%20de%20Maquillaje%20Art%C3%ADstico%20%F0%9F%8E%A8%20%C2%BFPodr%C3%ADas%20contarme%20m%C3%A1s%3F" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.436 1.27 4.888L2.004 22l5.237-1.246A9.927 9.927 0 0012.004 22c5.527 0 10.004-4.477 10.004-10.004C22.008 6.477 17.531 2 12.004 2z"/></svg>
+          Consultar por WhatsApp
+        </a>
+      </div>
+
+      <!-- TALLER TOTE BAGS -->
+      <div class="service-card card-yellow fade-in">
+        <div class="card-badge">🎁 ¡Se llevan el recuerdo!</div>
+        <div class="card-icon">👜</div>
+        <h3>Taller de Tote Bags</h3>
+        <p class="desc">Los chicos se van con su obra de arte bajo el brazo. Un taller creativo que entretiene, enseña y regala un recuerdo único.</p>
+        <ul class="includes-list">
+          <li>Una tote bag por niño para pintar y decorar</li>
+          <li>Pinturas textiles no tóxicas y sellos temáticos</li>
+          <li>Animadores guiando el taller paso a paso</li>
+          <li>Se seca al instante, se llevan a casa</li>
+          <li>Ideal para toda la mesa de invitados</li>
+        </ul>
+        <span class="card-duration">⏱ 40 – 50 minutos</span>
+        <a class="btn-wa-sm" href="https://wa.me/5491122370215?text=%C2%A1Hola!%20Me%20interesa%20el%20Taller%20de%20Tote%20Bags%20%F0%9F%91%9C%20%C2%BFPodr%C3%ADas%20contarme%20m%C3%A1s%3F" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.436 1.27 4.888L2.004 22l5.237-1.246A9.927 9.927 0 0012.004 22c5.527 0 10.004-4.477 10.004-10.004C22.008 6.477 17.531 2 12.004 2z"/></svg>
+          Consultar por WhatsApp
+        </a>
+      </div>
+
+      <!-- ANIMACIÓN TEMÁTICA -->
+      <div class="service-card card-mint fade-in">
+        <div class="card-badge">🌈 Personalizamos todo</div>
+        <div class="card-icon">🎭</div>
+        <h3>Animación Temática</h3>
+        <p class="desc">Juegos, música, concursos y dinámicas adaptadas a la temática de tu fiesta. Los chicos no paran de reír.</p>
+        <ul class="includes-list">
+          <li>Bienvenida animada con personaje o temática elegida</li>
+          <li>Juegos interactivos y coreografías</li>
+          <li>Concursos con premios sorpresa</li>
+          <li>Coordinación del momento de la torta</li>
+          <li>Sonido e iluminación básica incluida</li>
+        </ul>
+        <span class="card-duration">⏱ 90 – 120 minutos</span>
+        <a class="btn-wa-sm" href="https://wa.me/5491122370215?text=%C2%A1Hola!%20Me%20interesa%20la%20Animaci%C3%B3n%20Tem%C3%A1tica%20%F0%9F%8E%AD%20%C2%BFPodr%C3%ADas%20contarme%20m%C3%A1s%3F" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.436 1.27 4.888L2.004 22l5.237-1.246A9.927 9.927 0 0012.004 22c5.527 0 10.004-4.477 10.004-10.004C22.008 6.477 17.531 2 12.004 2z"/></svg>
+          Consultar por WhatsApp
+        </a>
+      </div>
+
+      <!-- COMBO COMPLETO -->
+      <div class="service-card card-purple fade-in">
+        <div class="card-badge">💜 Mejor precio</div>
+        <div class="card-icon">🎊</div>
+        <h3>Combo Completo</h3>
+        <p class="desc">La experiencia completa para que no te falte nada. La fiesta perfecta, de principio a fin, sin que tengas que coordinar nada.</p>
+        <ul class="includes-list">
+          <li>Animación temática completa (2 hs)</li>
+          <li>Maquillaje artístico para todos los invitados</li>
+          <li>Taller de Tote Bags como souvenir</li>
+          <li>2 animadores profesionales incluidos</li>
+          <li>Coordinación total del evento</li>
+          <li>Sonido e iluminación incluida</li>
+        </ul>
+        <span class="card-duration">⏱ 2,5 – 3 horas de pura magia</span>
+        <a class="btn-wa-sm" href="https://wa.me/5491122370215?text=%C2%A1Hola!%20Me%20interesa%20el%20Combo%20Completo%20%F0%9F%8E%8A%20%C2%BFPodr%C3%ADas%20contarme%20el%20precio%20y%20disponibilidad%3F" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.473-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.436 1.27 4.888L2.004 22l5.237-1.246A9.927 9.927 0 0012.004 22c5.527 0 10.004-4.477 10.004-10.004C22.008 6.477 17.531 2 12.004 2z"/></svg>
+          ¡Quiero el Combo Completo!
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ░░ DIFERENCIALES ░░ -->
+<section id="diferenciales">
+  <div class="section-inner">
+    <span class="section-tag">💜 ¿Por qué elegirnos?</span>
+    <h2 class="section-title">Lo que nos hace<br>diferentes</h2>
+    <p class="section-sub">No somos solo animadores. Somos el equipo que hace que vos disfrutes la fiesta tanto como tus hijos.</p>
+
+    <div class="diffs-grid">
+      <div class="diff-card fade-in">
+        <div class="diff-icon">🛡️</div>
+        <h4>Tranquilidad total para vos</h4>
+        <p>Llegamos a tiempo, nos organizamos solos y manejamos cualquier imprevisto. Vos solo disfrutás.</p>
+      </div>
+      <div class="diff-card fade-in">
+        <div class="diff-icon">✨</div>
+        <h4>100% personalizado</h4>
+        <p>Adaptamos la temática, los juegos y hasta los colores a los gustos de tu hijo/a. Cada fiesta es única.</p>
+      </div>
+      <div class="diff-card fade-in">
+        <div class="diff-icon">💛</div>
+        <h4>Amor por lo que hacemos</h4>
+        <p>Cada fiesta la vivimos con la misma energía y pasión. Los chicos lo sienten y por eso no paran de reír.</p>
+      </div>
+      <div class="diff-card fade-in">
+        <div class="diff-icon">🎓</div>
+        <h4>Animadores capacitados</h4>
+        <p>Todo nuestro equipo tiene formación en estimulación infantil y primeros auxilios. Tus hijos están en buenas manos.</p>
+      </div>
+      <div class="diff-card fade-in">
+        <div class="diff-icon">📦</div>
+        <h4>Todo incluido</h4>
+        <p>Materiales, equipos y ambientación básica. No necesitás coordinar con 5 proveedores distintos.</p>
+      </div>
+      <div class="diff-card fade-in">
+        <div class="diff-icon">⭐</div>
+        <h4>+150 familias felices</h4>
+        <p>Más de 150 fiestas en CABA y GBA avalan nuestra trayectoria. Mirá lo que dicen las familias que nos eligieron.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░ TESTIMONIOS ░░ -->
+<section id="testimonios">
+  <div class="section-inner">
+    <span class="section-tag">💬 Lo que dicen las familias</span>
+    <h2 class="section-title">Papás y mamás<br>que ya vivieron la magia</h2>
+    <p class="section-sub">Nada habla mejor de nosotros que las palabras de quienes ya confiaron en Micalu.</p>
+
+    <div class="testi-grid">
+      <div class="testi-card fade-in">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Superaron todas mis expectativas. Los chicos no pararon de reír en ningún momento. Lo mejor fue que yo también pude disfrutar la fiesta en vez de estar corriendo para todos lados."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av1">👩</div>
+          <div>
+            <div class="testi-name">Florencia M.</div>
+            <div class="testi-event">Cumple de Martina, 5 años · Palermo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-in">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"El maquillaje artístico fue un hit total. Cada nene quería ser el siguiente y los resultados eran increíbles. Ya los re-contraté para el cumple de mi otro hijo."</p>
+        <div class="testi-author">
+          <div class="testi-avatar av2">👨</div>
+          <div>
+            <div class="testi-name">Rodrigo P.</div>
+            <div class="testi-event">Cumple de Tomás, 7 años · Ramos Mejía</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-in">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Las tote bags fueron el souvenir más original que vi en un cumple. Los chicos las amaron y hasta los grandes quisieron participar del taller. ¡Muy recomendadas!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar av3">👩</div>
+          <div>
+            <div class="testi-name">Valeria C.</div>
+            <div class="testi-event">Cumple de Luna, 6 años · San Isidro</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PHOTO PLACEHOLDER -->
+      <div class="testi-photo-hint fade-in">
+        <span>📸</span>
+        <p><strong>¡Sumá fotos y videos reales aquí!</strong><br>Un reel de 30 segundos con momentos de tus fiestas puede multiplicar las consultas por 3. Mostrá las caras de los chicos, el maquillaje terminado y el momento del taller.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ░░ CTA FINAL ░░ -->
+<section id="cta-final">
+  <div class="section-inner">
+    <span class="section-tag">🎉 ¡No esperes más!</span>
+    <h2 class="section-title">Las fechas se agotan rápido.<br>¡Reservá la tuya hoy!</h2>
+    <p class="section-sub">Solo necesitás mandar un mensaje para saber si tenemos disponibilidad en tu fecha. Sin compromisos, sin vueltas.</p>
+    <div class="urgency-pill">⚡ Quedan pocas fechas disponibles este mes</div>
+    <a class="btn-wa-lg" href="https://wa.me/5491122370215?text=%C2%A1Hola%20Micalu!%20%F0%9F%8E%89%20Quiero%20reservar%20una%20animaci%C3%B3n%20para%20el%20cumplea%C3%B1os%20de%20mi%20hijo%2Fa.%20%C2%BFTienen%20disponibilidad%3F" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.436 1.27 4.888L2.004 22l5.237-1.246A9.927 9.927 0 0012.004 22c5.527 0 10.004-4.477 10.004-10.004C22.008 6.477 17.531 2 12.004 2z"/></svg>
+      Reservar mi fecha por WhatsApp
+    </a>
+    <p class="microcopy">✉️ Respondemos en menos de 1 hora · Sin compromiso · 100% gratis consultar</p>
+  </div>
+</section>
+
+<!-- ░░ FOOTER ░░ -->
+<footer>
+  <p>© 2025 <strong style="color:var(--pink)">Micalu Animaciones</strong> · Zona GBA y CABA · Hecho con 💜 para que cada fiesta sea mágica</p>
+  <p style="margin-top:.4rem">
+    <a href="https://wa.me/5491122370215" target="_blank">WhatsApp</a> ·
+    <a href="https://instagram.com/micalu.animaciones" target="_blank">Instagram</a>
+  </p>
+</footer>
+
+<!-- ░░ FLOATING WA BUTTON ░░ -->
+<a class="wa-float" href="https://wa.me/5491122370215?text=%C2%A1Hola!%20Quiero%20consultar%20sobre%20animaciones%20infantiles%20%F0%9F%8E%89" target="_blank" title="Chatear por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.477 2 2 6.477 2 12.004c0 1.77.463 3.436 1.27 4.888L2.004 22l5.237-1.246A9.927 9.927 0 0012.004 22c5.527 0 10.004-4.477 10.004-10.004C22.008 6.477 17.531 2 12.004 2z"/></svg>
+</a>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
 </html>

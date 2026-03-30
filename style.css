@@ -43,3 +43,9 @@ a {
 a:hover {
     background-color: #1ebe57;
 }
+
+h1 {
+    border: 2px solid red;
+    padding: 20px;
+    margin: 40px;
+  }

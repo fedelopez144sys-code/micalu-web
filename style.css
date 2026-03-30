@@ -49,3 +49,19 @@ h1 {
     padding: 20px;
     margin: 40px;
   }
+
+.servicios {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  
+.card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    width: 200px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-size: 16px;
+  }

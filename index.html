@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+  
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
   <symbol id="icon-whatsapp" viewBox="0 0 24 24">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
@@ -29,7 +29,7 @@
 <!-- ░░ HERO ░░ -->
 <section class="hero" id="inicio">
   <div class="hero-text">
-    <div class="hero-badge">🎉 ¡Más de 150 fiestas felices!</div>
+    <div class="hero-badge">🎉 ¡Más de 400 fiestas felices!</div>
     <h1>
       Hacé que la fiesta de tu hij@ sea
       <span class="highlight">inolvidable</span>
@@ -64,6 +64,20 @@
   </div>
 </section>
 
+<div id="service-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+
+    <h3 id="modal-title"></h3>
+    <p id="modal-desc"></p>
+
+    <a id="modal-wa" target="_blank" class="btn-wa-sm">
+      <svg viewBox="0 0 24 24"><use href="#icon-whatsapp"></use></svg>
+      Pedir cotización
+    </a>
+  </div>
+</div>
+
 <!-- ░░ SERVICIOS ░░ -->
 <section id="servicios">
   <div class="section-inner">
@@ -94,27 +108,7 @@
           </a>
         </div>
       </div>
-    <!-- MAQUILLAJE ARTÍSTICO -->
-    <div class="service-card card-pink fade-in" tabindex="0">
-        <div class="card-badge">⭐ Más pedido</div>
-        <div class="card-icon">🎨</div>
-        <h3>Maquillaje Artístico</h3>
-        <div class="service-details">
-        <p class="desc">Convertí a cada niño en su personaje favorito. Diseños seguros, coloridos y que duran toda la fiesta.</p>
-        <ul class="includes-list">
-            <li>Maquillaje profesional cara completa o media cara</li>
-            <li>Diseños temáticos: superhéroes, princesas, animales y más</li>
-            <li>Productos hipoalergénicos y seguros para niños</li>
-            <li>Hasta 20 niños por sesión</li>
-            <li>Momento fotográfico incluido 📸</li>
-        </ul>
-        <span class="card-duration">⏱ 45 – 60 minutos</span>
-        <a class="btn-wa-sm" href="https://wa.me/5491122370215?text=%C2%A1Hola!%20Me%20interesa%20el%20servicio%20de%20Maquillaje%20Art%C3%ADstico%20%F0%9F%8E%A8%20%C2%BFPodr%C3%ADas%20contarme%20m%C3%A1s%3F" target="_blank">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-whatsapp"></use></svg>
-            Consultar por WhatsApp
-        </a>
-        </div>
-        </div>
+    
         
       <!-- TALLER TOTE BAGS -->
       <div class="service-card card-yellow fade-in" tabindex="0">
@@ -185,6 +179,65 @@
 
     </div>
   </div>
+
+  <!-- SERVICIOS EXTRA -->
+<div class="extra-services fade-in">
+  <h3 class="extra-title">🎈 Más experiencias para sumar a tu fiesta</h3>
+
+  <div class="extra-grid">
+    <div class="extra-item" data-service="animacion">
+      ✨ Animación Clásica
+    </div>
+  
+    <div class="extra-item" data-service="maquillaje">
+      🎨 Maquillaje Artístico
+    </div>
+  
+    <div class="extra-item" data-service="glitter">
+      💖 Glitter Bar
+    </div>
+  
+    <div class="extra-item" data-service="peinados">
+      💇 Stand de Peinados
+    </div>
+  
+    <div class="extra-item" data-service="talleres">
+      👜 Talleres Creativos
+    </div>
+  
+    <div class="extra-item" data-service="slime">
+      🧪 Slime Party
+    </div>
+  
+    <div class="extra-item" data-service="spa">
+      💆 Spa Party
+    </div>
+  
+    <div class="extra-item" data-service="kermes">
+      🎪 Fiesta Kermés
+    </div>
+  
+    <div class="extra-item" data-service="acuatica">
+      💦 Fiesta Acuática
+    </div>
+  
+    <div class="extra-item" data-service="burbujas">
+      🫧 Show de Burbujas
+    </div>
+  
+    <div class="extra-item" data-service="jugos">
+      🥤 Barra de Jugos
+    </div>
+  
+    <div class="extra-item" data-service="gomitas">
+      🍬 Stand de Gomitas
+    </div>
+  
+    <div class="extra-item" data-service="eventos">
+      🏢 Eventos Especiales
+    </div>
+  </div>
+</div>
 </section>
 
 <!-- ░░ DIFERENCIALES ░░ -->

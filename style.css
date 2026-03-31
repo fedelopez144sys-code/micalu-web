@@ -403,6 +403,40 @@ nav a.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(3
 .btn-wa-sm:hover { background: var(--wa-dark); transform: scale(1.02); }
 .btn-wa-sm svg { width: 18px; height: 18px; fill: #fff; }
 
+.extra-services {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.extra-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark);
+}
+
+.extra-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  justify-content: center;
+}
+
+.extra-grid span {
+  background: #fff;
+  border: 2px solid var(--pink);
+  border-radius: 50px;
+  padding: .5rem 1rem;
+  font-weight: 700;
+  font-size: .9rem;
+  color: var(--text);
+  transition: transform .2s;
+}
+
+.extra-grid span:hover {
+  transform: scale(1.05);
+}
+
 /* --- DIFFERENTIALS --- */
 #diferenciales {
   background: linear-gradient(135deg, var(--dark) 0%, #2D1B69 100%);
@@ -599,4 +633,57 @@ footer a { color: var(--pink); text-decoration: none; }
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.extra-item {
+  background: #fff;
+  border: 2px solid var(--pink);
+  border-radius: 50px;
+  padding: .5rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.extra-item:hover {
+  transform: scale(1.05);
+  background: var(--pink);
+  color: #fff;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal-content h3 {
+  font-family: 'Baloo 2';
+  margin-bottom: .5rem;
+}
+
+.modal-content p {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
 }

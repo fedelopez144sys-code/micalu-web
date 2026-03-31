@@ -279,6 +279,8 @@ nav a.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(3
   transition: transform .25s, box-shadow .25s, border-color .25s;
   display: flex; flex-direction: column; gap: .9rem;
   position: relative; overflow: hidden;
+  cursor: pointer;
+  user-select: none;
 }
 .service-card::before {
   content: '';
@@ -329,6 +331,35 @@ nav a.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(3
   font-family: 'Baloo 2', cursive;
   font-size: 1.3rem; font-weight: 800;
   color: var(--dark);
+}
+
+/* --- SERVICES: botón expandible (hover) --- */
+.service-card:focus {
+  outline: 3px solid rgba(139,92,246,.35);
+  outline-offset: 4px;
+}
+
+.service-details {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-6px);
+  transition: max-height .45s ease, opacity .25s ease, transform .25s ease;
+}
+
+.service-card:hover .service-details,
+.service-card:focus-visible .service-details {
+  max-height: 520px; /* suficiente para el texto + lista */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .service-details {
+    max-height: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 .service-card .desc {
   font-size: .95rem; color: var(--muted); line-height: 1.55;

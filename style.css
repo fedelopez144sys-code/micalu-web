@@ -264,6 +264,23 @@ nav a.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(3
 /* --- SERVICES GRID --- */
 #servicios { background: linear-gradient(180deg, var(--white) 0%, #F8F0FF 100%); }
 
+.service-group {
+  margin-bottom: 2.4rem;
+}
+
+.group-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.7rem;
+  color: var(--dark);
+  margin-bottom: .5rem;
+}
+
+.group-description {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));

@@ -244,6 +244,9 @@ function renderServices() {
         <div class="card-icon">${service.icon || "✨"}</div>
         <h3>${service.title}</h3>
         <div class="service-details">
+          <div class="image-container">
+            <img src="img/${key}.jpg" alt="${service.title}" class="service-img">
+          </div>
           <p class="desc">${service.desc}</p>
           ${service.includes ? `<ul class="includes-list">${service.includes.map((i) => `<li>${i}</li>`).join("")}</ul>` : ""}
           ${service.duration ? `<span class="card-duration">${service.duration}</span>` : ""}
@@ -274,6 +277,7 @@ const modal = document.getElementById("service-modal");
 const title = document.getElementById("modal-title");
 const desc = document.getElementById("modal-desc");
 const wa = document.getElementById("modal-wa");
+const modalImg = document.getElementById("modal-img");
 
 document.querySelectorAll(".extra-item").forEach(item => {
   item.addEventListener("click", () => {
@@ -284,12 +288,15 @@ document.querySelectorAll(".extra-item").forEach(item => {
       title.textContent = "Servicio";
       desc.textContent = "Estamos preparando los detalles de este servicio. Contactanos para más información.";
       wa.href = "https://wa.me/5491122370215";
+      modalImg.src = "";
       modal.style.display = "flex";
       return;
     }
 
     title.textContent = data.title;
     desc.textContent = data.desc;
+    modalImg.src = `img/${key}.jpg`;
+    modalImg.alt = data.title;
 
     wa.href = `https://wa.me/5491122370215?text=${encodeURIComponent(data.msg)}`;
 

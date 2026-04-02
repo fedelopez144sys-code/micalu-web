@@ -245,7 +245,11 @@ function renderServices() {
         <h3>${service.title}</h3>
         <div class="service-details">
           <div class="image-container">
-            <img src="img/${key}.jpg" alt="${service.title}" class="service-img">
+            <div class="carousel" data-service="${key}">
+              <img src="img/${key}-1.jpg" alt="${service.title}" class="service-img carousel-img active">
+              <img src="img/${key}-2.jpg" alt="${service.title}" class="service-img carousel-img">
+              <img src="img/${key}-3.jpg" alt="${service.title}" class="service-img carousel-img">
+            </div>
           </div>
           <p class="desc">${service.desc}</p>
           ${service.includes ? `<ul class="includes-list">${service.includes.map((i) => `<li>${i}</li>`).join("")}</ul>` : ""}
@@ -265,6 +269,81 @@ function renderServices() {
 
 renderServices();
 
+// Carrusel de imágenes para cada servicio
+function setupCarousels() {
+  document.querySelectorAll('.carousel').forEach(carousel => {
+    const imgs = carousel.querySelectorAll('.carousel-img');
+    let idx = 0;
+    let interval = null;
+    function show(idxToShow) {
+      imgs.forEach((img, i) => {
+        img.classList.toggle('active', i === idxToShow);
+      });
+    }
+    function next() {
+      idx = (idx + 1) % imgs.length;
+      show(idx);
+    }
+    function startLoop() {
+      if (interval) clearInterval(interval);
+      interval = setInterval(next, 3000);
+    }
+    carousel.addEventListener('click', () => {
+      next();
+      startLoop();
+    });
+    show(idx);
+    startLoop();
+  });
+}
+
+// Llamar después de renderizar servicios
+setupCarousels();
+
+// Agregar carruseles a los servicios hardcodeados en HTML
+function addCarouselsToStaticServices() {
+  const imageMap = {
+    'Maquillaje Artístico': 'maquillaje',
+    'Taller de Tote Bags': 'tote',
+    'Glitter Bar': 'glitter',
+    'Stand de Peinados': 'peinados',
+    'Slime Party': 'slime',
+    'Spa Party': 'spa',
+    'Fiesta Kermés': 'kermes',
+    'Fiesta Acuática': 'acuatica',
+    'Show de Burbujas': 'burbujas',
+    'Barra de Jugos': 'jugos',
+    'Stand de Gomitas': 'gomitas',
+    'Eventos Especiales': 'eventos'
+  };
+
+  document.querySelectorAll('.service-details').forEach(details => {
+    // Elimina cualquier carrusel anterior para evitar duplicados
+    const old = details.querySelector('.image-container');
+    if (old) old.remove();
+    const card = details.closest('.service-card');
+    const h3 = card.querySelector('h3').textContent.trim();
+    const key = imageMap[h3] || 'animacion'; // default to animacion
+
+    const container = document.createElement('div');
+    container.className = 'image-container';
+    const carousel = document.createElement('div');
+    carousel.className = 'carousel';
+    carousel.innerHTML = `
+      <img src="img/${key}-1.jpg" alt="${h3}" class="service-img carousel-img active">
+      <img src="img/${key}-2.jpg" alt="${h3}" class="service-img carousel-img">
+      <img src="img/${key}-3.jpg" alt="${h3}" class="service-img carousel-img">
+    `;
+    container.appendChild(carousel);
+    details.insertBefore(container, details.firstChild);
+  });
+}
+
+addCarouselsToStaticServices();
+
+// Configurar carruseles después de agregar los nuevos
+setupCarousels();
+
 // Add click to expand functionality
 document.querySelectorAll('.service-card').forEach(card => {
   card.addEventListener('click', () => {
@@ -277,7 +356,9 @@ const modal = document.getElementById("service-modal");
 const title = document.getElementById("modal-title");
 const desc = document.getElementById("modal-desc");
 const wa = document.getElementById("modal-wa");
-const modalImg = document.getElementById("modal-img");
+const modalCarousel = document.getElementById("modal-carousel");
+let modalCarouselIdx = 0;
+let modalCarouselInterval = null;
 
 document.querySelectorAll(".extra-item").forEach(item => {
   item.addEventListener("click", () => {
@@ -288,17 +369,44 @@ document.querySelectorAll(".extra-item").forEach(item => {
       title.textContent = "Servicio";
       desc.textContent = "Estamos preparando los detalles de este servicio. Contactanos para más información.";
       wa.href = "https://wa.me/5491122370215";
-      modalImg.src = "";
+      if (modalCarousel) modalCarousel.innerHTML = "";
       modal.style.display = "flex";
       return;
     }
 
     title.textContent = data.title;
     desc.textContent = data.desc;
-    modalImg.src = `img/${key}.jpg`;
-    modalImg.alt = data.title;
-
     wa.href = `https://wa.me/5491122370215?text=${encodeURIComponent(data.msg)}`;
+
+    // Carrusel en el modal
+    if (modalCarousel) {
+      modalCarousel.innerHTML = `
+        <img src="img/${key}-1.jpg" alt="${data.title}" class="modal-img modal-carousel-img active">
+        <img src="img/${key}-2.jpg" alt="${data.title}" class="modal-img modal-carousel-img">
+        <img src="img/${key}-3.jpg" alt="${data.title}" class="modal-img modal-carousel-img">
+      `;
+      const imgs = modalCarousel.querySelectorAll('.modal-carousel-img');
+      modalCarouselIdx = 0;
+      function show(idxToShow) {
+        imgs.forEach((img, i) => {
+          img.classList.toggle('active', i === idxToShow);
+        });
+      }
+      function next() {
+        modalCarouselIdx = (modalCarouselIdx + 1) % imgs.length;
+        show(modalCarouselIdx);
+      }
+      function startLoop() {
+        if (modalCarouselInterval) clearInterval(modalCarouselInterval);
+        modalCarouselInterval = setInterval(next, 3000);
+      }
+      modalCarousel.onclick = () => {
+        next();
+        startLoop();
+      };
+      show(modalCarouselIdx);
+      startLoop();
+    }
 
     modal.style.display = "flex";
   });

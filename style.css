@@ -390,20 +390,57 @@ nav a.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(3
   font-size: .95rem; color: var(--muted); line-height: 1.55;
 }
 
-.service-img {
+.service-img, .modal-img {
   width: 100%;
-  max-width: 200px;
-  height: auto;
+  height: 100%;
+  max-width: 260px;
+  max-height: 160px;
   border-radius: 8px;
-
+  opacity: 0;
+  position: absolute;
+  left: 0; top: 0;
+  right: 0; bottom: 0;
+  margin: auto;
+  object-fit: cover;
+  transition: opacity 0.8s cubic-bezier(.4,0,.2,1), transform 0.8s cubic-bezier(.4,0,.2,1);
+  transform: scale(0.9);
+  z-index: 1;
 }
+
+.carousel, #modal-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  height: 160px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.carousel-img.active, .modal-carousel-img.active {
+  opacity: 1;
+  position: absolute;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.carousel-img, .modal-carousel-img {
+  cursor: pointer;
+}
+
 
 .image-container {
   background: var(--pink);
   border-radius: 12px;
   padding: 8px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 1rem;
+  min-height: 180px;
+  position: relative;
 }
 
 .includes-list {

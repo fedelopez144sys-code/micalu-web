@@ -262,6 +262,13 @@ function renderServices() {
 
 renderServices();
 
+// Add click to expand functionality
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('expanded');
+  });
+});
+
 // MODAL LOGIC
 const modal = document.getElementById("service-modal");
 const title = document.getElementById("modal-title");

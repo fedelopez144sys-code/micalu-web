@@ -194,7 +194,7 @@ nav a.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(3
 }
 .hero-img-frame {
   width: 100%;
-  max-width: 480px;
+  max-width: 550px;
   aspect-ratio: 4/3.6;
   border-radius: 28px;
   background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
@@ -372,7 +372,8 @@ nav a.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(3
 }
 
 .service-card:hover .service-details,
-.service-card:focus-visible .service-details {
+.service-card:focus-visible .service-details,
+.service-card.expanded .service-details {
   max-height: 520px; /* suficiente para el texto + lista */
   opacity: 1;
   transform: translateY(0);
@@ -428,7 +429,7 @@ nav a.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(3
 .btn-wa-sm svg { width: 18px; height: 18px; fill: #fff; }
 
 .extra-services {
-  margin-top: 3rem;
+  margin-top: 0;
   text-align: center;
 }
 
